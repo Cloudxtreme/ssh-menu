@@ -12,7 +12,7 @@ end
 
 def max_conn_size
   $connections.inject(0) do |max, element|
-    element.keys.first.size if element.keys.first.size > max.to_i
+    element.keys.first.size > max.to_i ? element.keys.first.size : max
   end
 end
 

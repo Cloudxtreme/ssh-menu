@@ -28,7 +28,7 @@ ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-linux]
 Since this script is intended to be as simple as possible, the configuration is done within the script. Just change the entries in the `$connections` hash.
 ```
 $connections = [
-    {"user@host1.com" => "development server"},
-    {"user@host2.com" => "QA test"}
-  ]
+  {"user@host1.com" => "development server"},
+  {"user@host2.com" => "QA test"}
+]
 ```

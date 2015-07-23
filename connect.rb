@@ -1,13 +1,13 @@
 #! /usr/bin/env ruby
 
 $connections = [
-    {"user@host1.com" => "development server"},
-    {"user@host2.com" => "QA test"}
-  ]
+  {"user@host1.com" => "development server"},
+  {"user@host2.com" => "QA test"}
+]
  
 Signal.trap("SIGINT") do
-	puts ("\nexit")
-	exit
+  puts ("\nexit")
+  exit
 end
 
 def max_conn_size
@@ -17,9 +17,9 @@ def max_conn_size
 end
 
 def print_connections
-	$connections.each.with_index do |connection, index|
-		conn, description = connection.first
-		printf "%d) %-#{max_conn_size+3}s %s\n", index+1, conn, description
+  $connections.each.with_index do |connection, index|
+    conn, description = connection.first
+    printf "%#{$connections.size.to_s.length}d) %-#{max_conn_size+3}s %s\n",  index+1, conn, description
   end
 end
 
@@ -28,8 +28,8 @@ def request_selection
   system("stty raw -echo")
   input = Integer(STDIN.getc)
   ensure
-	system("stty -raw echo")
-	print "#{input}\n"
+    system("stty -raw echo")
+    print "#{input}\n"
 end
 
 def connect(selection)
@@ -39,22 +39,22 @@ def connect(selection)
 end
 
 def get_selection
-if(ARGV[0]) 
-		selection = Integer(ARGV[0])
-	else
-		print_connections
-		selection = request_selection
-	end
-	if selection.between?(1, $connections.size)
-		selection
-	else
-		raise ArgumentError 	
-	end
-	rescue ArgumentError
-		puts "Invalid Argument. Selection must be between 1 and #{$connections.size}"
-		exit -1
+  if(ARGV[0]) 
+    selection = Integer(ARGV[0])
+  else
+    print_connections
+    selection = request_selection
+  end
+  if selection.between?(1, $connections.size)
+    selection
+  else
+    raise ArgumentError 	
+  end
+  rescue ArgumentError
+    puts "Invalid Argument. Selection must be between 1 and #{$connections.size}"
+    exit -1
 end
 
 if __FILE__ == $0
-	connect get_selection
+  connect get_selection
 end
